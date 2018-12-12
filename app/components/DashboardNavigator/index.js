@@ -1,8 +1,11 @@
-import { NavigationActions  } from 'react-navigation'
+import {  createStackNavigator, createAppContainer  } from 'react-navigation'
 
 import ChatScreen from './ChatScreen'
+
 const routeConfig = {
-    Chat: { screen: ChatScreen }
-  }
-  
-  export default StackNavigator(routeConfig)
+  Chat: { screen: ChatScreen  }
+}
+export default createAppContainer(routeConfig);
+
+
+ 
