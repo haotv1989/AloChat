@@ -8,15 +8,15 @@ import translations from '../../../i18n'
 class ChatScreenContainer extends Component {
 
   static navigationOptions = {
-    title: 'chat',    
+    title: translations.t('chat'),
     headerRight: <LogoutButton />
   }
 
-  render() {   
+  render() {
     return (
       <ChatScreen />
     );
-  } 
+  }
 }
 
 export default ChatScreenContainer

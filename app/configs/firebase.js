@@ -5,4 +5,6 @@ export const firebaseConfig = {
     projectId: 'appchatchailease',
     storageBucket: '',
     messagingSenderId: '425094047298',
-    }
+}
+
+
