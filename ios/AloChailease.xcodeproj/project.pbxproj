@@ -40,6 +40,7 @@
 		E0D1A64806304F499B96464E /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CBFECCB90546E78CD9EA3A /* libRNGestureHandler.a */; };
 		2DBB32037ADF40ABA04CCFDA /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D935B4F3940B42E6AF08D933 /* libRNI18n.a */; };
 		E4615A18F0004B3AAA8C8B74 /* libRNI18n-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDF6244AC1C841F7941119F1 /* libRNI18n-tvOS.a */; };
+		AAFB4201372B4F4DADBBE0B4 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B470995F3FF5427D80A74F71 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +351,7 @@
 		CFE59BBAAC8E45B6B933BD39 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; name = "RNI18n.xcodeproj"; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		D935B4F3940B42E6AF08D933 /* libRNI18n.a */ = {isa = PBXFileReference; name = "libRNI18n.a"; path = "libRNI18n.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		EDF6244AC1C841F7941119F1 /* libRNI18n-tvOS.a */ = {isa = PBXFileReference; name = "libRNI18n-tvOS.a"; path = "libRNI18n-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		B470995F3FF5427D80A74F71 /* Ionicons.ttf */ = {isa = PBXFileReference; name = "Ionicons.ttf"; path = "../node_modules/react-native-ionicons/fonts/Ionicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -589,6 +591,7 @@
 				00E356EF1AD99517003FC87E /* AloChaileaseTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				20CF821F7DC34DFA9BD6DB3A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -614,6 +617,15 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		20CF821F7DC34DFA9BD6DB3A /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				B470995F3FF5427D80A74F71 /* Ionicons.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1061,6 +1073,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				AAFB4201372B4F4DADBBE0B4 /* Ionicons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

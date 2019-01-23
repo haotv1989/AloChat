@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import { ActivityIndicator } from 'react-native'
 
-import DashboardNavigator from '../DashboardNavigator'
-import AuthScreen from '../AuthScreen'
+import DashboardNavigator  from  '../../../../DashboardNavigator'
+import AuthScreen from '../../../../AuthScreen'
 
-import styles from './Styles'
+import styles from '../../Styles'
 
 const ChatAppComponent = props => {
   if (props.restoring) {

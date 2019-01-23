@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { restoreSession } from '../../store/session/actions'
+import { restoreSession } from '../../../../../store/session/actions'
 
-import ChatAppComponent from './Component'
+import ChatLogComponent from './Component'
 
-class ChatAppContainer extends Component {
+class ChatLogContainer extends Component {
 
   componentDidMount() {
     this.props.restore()
@@ -14,7 +14,7 @@ class ChatAppContainer extends Component {
 
   render() {
     return (
-      <ChatAppComponent
+      <ChatLogComponent
         restoring={this.props.restoring}
         logged={this.props.logged} />)
   }
@@ -35,4 +35,4 @@ ChatAppContainer.propTypes = {
   restore: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatAppContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ChatLogContainer)
