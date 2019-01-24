@@ -4,20 +4,20 @@ import { connect } from 'react-redux'
 
 import { restoreSession } from  '../../../../../store/session/actions'
 
-import ChatAppComponent from './Component'
+import SettingComponent from './Component'
 
-class ChatAppContainer extends Component {
-
+class SettingContainer extends Component {
+ 
   componentDidMount() {
     this.props.restore()
   }
 
   render() {
     return (
-      <ChatAppComponent
+      <SettingComponent
         restoring={this.props.restoring}
-        logged={this.props.logged} />)
-  }
+        logged={this.props.logged}/>)
+  } 
 }
 
 const mapStateToProps = state => ({
@@ -29,10 +29,10 @@ const mapDispatchToProps = {
   restore: restoreSession
 }
 
-ChatAppContainer.propTypes = {
+SettingContainer.propTypes = {
   restoring: PropTypes.bool.isRequired,
   logged: PropTypes.bool.isRequired,
   restore: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatAppContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingContainer)

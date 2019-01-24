@@ -1,6 +1,6 @@
 //import { createStackNavigator, createAppContainer } from "react-navigation";
 import { createBottomTabNavigator, createAppContainer,createStackNavigator } from 'react-navigation'
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-ionicons';
 import RoomScreen from './MainScreen/RoomScreen'
 import SettingScreen from './MainScreen/SettingScreen'
 import ChatScreen from './ChatScreen'
@@ -8,7 +8,7 @@ import MainSreen from './MainScreen'
 
 const HomeStack = createStackNavigator({
   Main: { screen: MainSreen },
-  Chat: { screen: ChatScreen },
+  Chat: { screen: ChatScreen}
  
 });
 
@@ -24,21 +24,22 @@ const TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+          iconName = `home'${focused ? '' : '-outline'}`;
         }
         else if (routeName === 'Room') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+          iconName = `people'${focused ? '' : '-outline'}`;
         } 
         else if (routeName === 'Setting') {
-          iconName = `ios-options${focused ? '' : '-outline'}`;
+          iconName = `settings'${focused ? '' : '-outline'}`;
         }
 
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        return <Icon name={iconName} size={25} color={tintColor} />;
       },
     }),
     tabBarOptions: {
+      showIcon: true ,
       activeTintColor: 'red',
       inactiveTintColor: 'gray',
     },
