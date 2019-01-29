@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import { View,ListView } from 'react-native'
 import styles from './Styles'
 import RoomRow from '../RoomRow' 
+import Header from '../Header' 
 var data =[{title:"BOD", image:'person' },{title:"MIS", image:'person' },{title:"Credit Dept", image:'person' }, {title:"Marketing Dept", image: 'person'}, {title:"Customer Service", image: 'person'}];
 class RoomFormComponent extends Component {
     constructor() {
@@ -18,6 +19,7 @@ class RoomFormComponent extends Component {
               dataSource={this.state.dataSource}
               renderRow={(data) => <RoomRow {...data} />}
               renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+              renderHeader={() => <Header />}
             />
             
           );
