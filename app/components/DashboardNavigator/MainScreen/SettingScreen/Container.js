@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import SettingScreen from './Component'
-class SettingScreenContainer extends Component {
+import SettingScreenComponent from './Component'
 
-  render() {
+class SettingScreenContainer extends Component {
+render() {
     return (
-      <SettingScreen />
+      <SettingScreenComponent />
     );
   }
 }
-
 export default SettingScreenContainer

@@ -1,7 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-ionicons';
 import { View, Text } from 'react-native';
-
 import styles from './Styles'
 const Row = (props) => (
     <View style={styles.container}>
@@ -11,7 +10,4 @@ const Row = (props) => (
       </Text>
     </View>
   );
-  
-
-
 export default Row;

@@ -22,7 +22,7 @@ const ChatAppComponent = props => {
 
 ChatAppComponent.propTypes = {
   restoring: PropTypes.bool.isRequired,
-  logged: PropTypes.bool.isRequired,
+  logged: PropTypes.bool.isRequired
 }
 
 export default ChatAppComponent
