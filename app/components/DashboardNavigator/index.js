@@ -4,11 +4,19 @@ import Icon from 'react-native-ionicons';
 import RoomScreen from './MainScreen/RoomScreen'
 import SettingScreen from './MainScreen/SettingScreen'
 import ChatScreen from './ChatScreen'
-import MainSreen from './MainScreen'
+import MainScreen from './MainScreen'
+import ProfileScreen from '../DashboardNavigator/MainScreen/SettingScreen/ProfileForm' 
+import PasswordScreen from '../DashboardNavigator/MainScreen/SettingScreen/PasswordForm' 
 
 const HomeStack = createStackNavigator({
-  Main: { screen: MainSreen },
+  Main: { screen: MainScreen },
   Chat: { screen: ChatScreen}
+ 
+});
+const SettingStack = createStackNavigator({
+  Setting: {screen: SettingScreen},
+  Profile: { screen: ProfileScreen },
+  ChangePassword: { screen: PasswordScreen}
  
 });
 
@@ -16,7 +24,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     Home: { screen: HomeStack },
     Room: { screen: RoomScreen },
-    Setting: { screen: SettingScreen }
+    Setting: { screen: SettingStack }
   },
   {
     navigationOptions: ({ navigation }) => ({
