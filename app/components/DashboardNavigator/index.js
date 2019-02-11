@@ -1,4 +1,5 @@
 //import { createStackNavigator, createAppContainer } from "react-navigation";
+import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer,createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-ionicons';
 import RoomScreen from './MainScreen/RoomScreen'
@@ -20,38 +21,49 @@ const SettingStack = createStackNavigator({
  
 });
 
-const TabNavigator = createBottomTabNavigator(
+const TabNavigator = createBottomTabNavigator(  
   {
-    Home: { screen: HomeStack },
-    Room: { screen: RoomScreen },
-    Setting: { screen: SettingStack }
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-        if (routeName === 'Home') {
-          iconName = `home'${focused ? '' : '-outline'}`;
-        }
-        else if (routeName === 'Room') {
-          iconName = `people'${focused ? '' : '-outline'}`;
-        } 
-        else if (routeName === 'Setting') {
-          iconName = `settings'${focused ? '' : '-outline'}`;
-        }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Icon name={iconName} size={25} color={tintColor} />;
-      },
-    }),
-    tabBarOptions: {
-      showIcon: true ,
-      activeTintColor: 'red',
-      inactiveTintColor: 'gray',
+    Home: { screen: HomeStack,
+    path: '/',
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor, focused }) => (
+        <Icon
+          name={focused ? 'ios-home' : 'ios-home'}
+          size={26}
+          style={{ color: tintColor }}
+        />
+      ),
     },
-  }
+  },
+    Room: { screen: RoomScreen, 
+      path: '/Rooms',
+      navigationOptions: {
+        tabBarLabel: 'Room',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon
+            name={focused ? 'ios-contacts' : 'ios-contacts'}
+            size={26}
+            style={{ color: tintColor }}
+          />
+        ),
+      },
+    },  
+    Setting: { screen: SettingStack,
+      path: '/Settings',
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Icon
+            name={focused ? 'ios-settings' : 'ios-settings'}
+            size={26}
+            style={{ color: tintColor }}
+          />
+        ),
+      }, 
+    }
+  },
+  
 );
 
 const AppContainer = createAppContainer(TabNavigator);

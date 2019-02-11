@@ -1,107 +1,63 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
-import { List, ListItem, SearchBar,FlatList } from 'react-native-elements';
-//var dataList =[{id:1,title:"My Profile", image:'person' }, {id:2,title:"Change Password", image: 'lock'}, {id:3,title:"Logout", image: 'log-out'}]; 
+import { View, Text, FlatList, ActivityIndicator } from "react-native";
+import { List, ListItem, SearchBar } from "react-native-elements";
+const list = [
+  {
+    name: 'Change Password',
+    avatar_url: 'person',   
+  },
+  {
+    name: 'Notifications',
+    avatar_url: 'notifications',
+    
+  },
+  {
+    name: 'Sign Out',
+    avatar_url: 'exit',
+    
+  },
+  // more items
+]
 class SettingFormComponent extends Component {  
-  constructor(props) {
-    super(props);
-
+  
+  constructor() {
+    super();   
     this.state = {
-      loading: false,
-      data: [],
-      error: null,
+      dataSource: list,
     };
-
-    this.arrayholder = [];
-  }
-
-  componentDidMount() {
-    this.makeRemoteRequest();
-  }
-
-  makeRemoteRequest = () => {
-    const url = `https://randomuser.me/api/?&results=20`;
-    this.setState({ loading: true });
-
-    fetch(url)
-      .then(res => res.json())
-      .then(res => {
-        this.setState({
-          data: res.results,
-          error: res.error || null,
-          loading: false,
-        });
-        this.arrayholder = res.results;
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
-  };
-
+  }; 
   renderSeparator = () => {
     return (
       <View
         style={{
           height: 1,
-          width: '86%',
-          backgroundColor: '#CED0CE',
-          marginLeft: '14%',
+          width: "86%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "14%"
         }}
       />
     );
   };
 
-  searchFilterFunction = text => {
-    console.log(this.arrayholder);
-    const newData = this.arrayholder.filter(item => {
-      const itemData = `${item.name.title.toUpperCase()} ${item.name.first.toUpperCase()} ${item.name.last.toUpperCase()}`;
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    this.setState({
-      data: newData,
-    });
-  };
-
-  renderHeader = () => {
+  keyExtractor = (item, index) => index
+  
+  renderItem = ({ item }) => (
+    <ListItem
+      title={item.name}    
+      leftIcon ={{name:item.avatar_url       
+      }}      
+      
+    />
+  )  
+  render () {
     return (
-      <SearchBar
-        placeholder="Type Here..."
-        lightTheme
-        round
-        onChangeText={text => this.searchFilterFunction(text)}
-        autoCorrect={false}
+      <FlatList
+        keyExtractor={this.keyExtractor}
+        data={this.state.dataSource}
+        renderItem={this.renderItem}      
+        ItemSeparatorComponent={this.renderSeparator}
       />
-    );
-  };
-
-  render() {
-    if (this.state.loading) {
-      return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <ActivityIndicator />
-        </View>
-      );
-    }
-    return (
-      <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-        <FlatList
-          data={this.state.data}
-          renderItem={({ item }) => (
-            <ListItem
-              roundAvatar
-              title={`${item.name.first} ${item.name.last}`}
-              subtitle={item.email}
-              avatar={{ uri: item.picture.thumbnail }}
-              containerStyle={{ borderBottomWidth: 0 }}
-            />
-          )}
-          keyExtractor={item => item.email}
-          ItemSeparatorComponent={this.renderSeparator}
-          ListHeaderComponent={this.renderHeader}
-        />
-      </List>
-    );
+    )
   }
 }
 
