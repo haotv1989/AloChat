@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
-import { List, ListItem, SearchBar } from "react-native-elements";
+import { View,  FlatList } from "react-native";
+import {  ListItem, Header } from "react-native-elements";
 const list = [
   {
     name: 'Change Password',
@@ -38,6 +38,15 @@ class SettingFormComponent extends Component {
       />
     );
   };
+  renderHeader = () => {    
+    return ( 
+      <Header
+      
+      centerComponent={{ text: 'Settings', style: { color: '#fff' } }}     
+    />
+     
+    );  
+  }; 
 
   keyExtractor = (item, index) => index
   
@@ -56,6 +65,7 @@ class SettingFormComponent extends Component {
         data={this.state.dataSource}
         renderItem={this.renderItem}      
         ItemSeparatorComponent={this.renderSeparator}
+        ListHeaderComponent={this.renderHeader}  
       />
     )
   }

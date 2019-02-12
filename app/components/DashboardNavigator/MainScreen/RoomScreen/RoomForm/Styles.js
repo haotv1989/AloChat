@@ -3,8 +3,17 @@ export default StyleSheet.create({
     /*
      * Removed for brevity
      */separator: {
-      flex: 1,
-      height: StyleSheet.hairlineWidth,
-      backgroundColor: '#8E8E8E',
+      height: 1,
+          width: "86%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "14%"
+    },
+    searchBar:{
+      width: "85%"
+
+    },
+    addButton:{
+      width: "15%",
+      color:"#0366d6"
     },
   });
