@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { View,  FlatList } from "react-native";
-import {  ListItem, Header } from "react-native-elements";
+import { View,  FlatList,TouchableOpacity } from "react-native";
+import styles from './Styles'
+import {  ListItem} from "react-native-elements";
 const list = [
+  {
+    name: 'My Profile',
+    avatar_url: 'person',   
+  },
   {
     name: 'Change Password',
     avatar_url: 'person',   
@@ -18,8 +23,10 @@ const list = [
   },
   // more items
 ]
-class SettingFormComponent extends Component {  
-  
+class SettingFormComponent extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Setting!',
+  }; 
   constructor() {
     super();   
     this.state = {
@@ -29,34 +36,27 @@ class SettingFormComponent extends Component {
   renderSeparator = () => {
     return (
       <View
-        style={{
-          height: 1,
-          width: "86%",
-          backgroundColor: "#CED0CE",
-          marginLeft: "14%"
-        }}
+        style={styles.separator}
       />
     );
-  };
-  renderHeader = () => {    
-    return ( 
-      <Header
-      
-      centerComponent={{ text: 'Settings', style: { color: '#fff' } }}     
-    />
-     
-    );  
   }; 
-
+  _onPress(item) {
+    this.props.navigation.navigate('Profile', {
+      itemId: item.id,
+      title: item.name,
+    });
+  }
   keyExtractor = (item, index) => index
   
   renderItem = ({ item }) => (
+    <TouchableOpacity    onPress={() => this._onPress(item)} >
     <ListItem
       title={item.name}    
       leftIcon ={{name:item.avatar_url       
       }}      
       
     />
+    </TouchableOpacity>
   )  
   render () {
     return (
@@ -65,7 +65,7 @@ class SettingFormComponent extends Component {
         data={this.state.dataSource}
         renderItem={this.renderItem}      
         ItemSeparatorComponent={this.renderSeparator}
-        ListHeaderComponent={this.renderHeader}  
+       
       />
     )
   }

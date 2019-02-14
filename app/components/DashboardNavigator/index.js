@@ -1,17 +1,21 @@
-//import { createStackNavigator, createAppContainer } from "react-navigation";
 import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer,createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-ionicons';
-import RoomScreen from './MainScreen/RoomScreen'
-import SettingScreen from './MainScreen/SettingScreen'
+import RoomScreen from './RoomScreen'
+import SettingScreen from './SettingScreen'
 import ChatScreen from './ChatScreen'
 import MainScreen from './MainScreen'
-import ProfileScreen from '../DashboardNavigator/MainScreen/SettingScreen/ProfileForm' 
-import PasswordScreen from '../DashboardNavigator/MainScreen/SettingScreen/PasswordForm' 
+import ProfileScreen from './ProfileScreen' 
+import PasswordScreen from './PasswordScreen' 
 
 const HomeStack = createStackNavigator({
   Main: { screen: MainScreen },
   Chat: { screen: ChatScreen}
+ 
+});
+const RoomStack = createStackNavigator({
+  Room: { screen: RoomScreen }
+  
  
 });
 const SettingStack = createStackNavigator({
@@ -36,7 +40,7 @@ const TabNavigator = createBottomTabNavigator(
       ),
     },
   },
-    Room: { screen: RoomScreen, 
+    Room: { screen: RoomStack, 
       path: '/Rooms',
       navigationOptions: {
         tabBarLabel: 'Room',
@@ -63,6 +67,19 @@ const TabNavigator = createBottomTabNavigator(
       }, 
     }
   },
+  {
+    initialRouteName: 'Home',
+    /* The header config from HomeScreen is now here */
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  }
   
 );
 

@@ -6,6 +6,7 @@ export default StyleSheet.create({
     marginRight: 10,
     height: 40,
     alignItems: 'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    with:'85%'
   }
 })

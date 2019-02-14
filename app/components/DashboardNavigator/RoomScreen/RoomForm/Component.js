@@ -1,12 +1,13 @@
 import React,{Component} from 'react'
 import { View,FlatList } from 'react-native'
-import {  ListItem,Header } from "react-native-elements";
-import AddRoom from '../AddButton'
-import SearchBar from '../SearchBar'
+import {  ListItem } from "react-native-elements";
 import styles from './Styles'
-
+var data =[{title:"BOD", image:'person' },{title:"MIS", image:'person' },{title:"Credit Dept", image:'person' }, {title:"Marketing Dept", image: 'person'}, {title:"Customer Service", image: 'person'}];
 class RoomFormComponent extends Component {
-  constructor() {
+  static navigationOptions = {
+    tabBarLabel: 'Room!',
+  };
+   constructor() {
     super();   
     this.state = {
       dataSource: data,
@@ -19,9 +20,7 @@ class RoomFormComponent extends Component {
       />
     );
   };
-
-  keyExtractor = (item, index) => index
-  
+  keyExtractor = (item, index) => index  
   renderItem = ({ item }) => (
     <ListItem
       title={item.title}    
@@ -29,32 +28,18 @@ class RoomFormComponent extends Component {
       }}      
       
     />
-  )
- 
-  renderHeader = () => {    
-    return ( 
-      <Header
-      leftComponent={{ icon: 'menu', color: '#fff' }}
-      centerComponent={<SearchBar/>}
-      rightComponent={<AddRoom/>}
-    />        
-    );  
-  }; 
- 
+  ) 
   render () {    
-    return (  
+    return ( 
     
       <FlatList
         keyExtractor={this.keyExtractor}
         data={this.state.dataSource}
         renderItem={this.renderItem}      
         ItemSeparatorComponent={this.renderSeparator}
-        ListHeaderComponent={this.renderHeader}  
+     
       />
     )
   }
 }
-
-
-
 export default RoomFormComponent
