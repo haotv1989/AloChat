@@ -30,6 +30,7 @@ const TabNavigator = createBottomTabNavigator(
     Home: { screen: HomeStack,
     path: '/',
     navigationOptions: {
+      title:'Home',
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor, focused }) => (
         <Icon
@@ -43,6 +44,7 @@ const TabNavigator = createBottomTabNavigator(
     Room: { screen: RoomStack, 
       path: '/Rooms',
       navigationOptions: {
+        title:'Room',
         tabBarLabel: 'Room',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon
@@ -56,6 +58,7 @@ const TabNavigator = createBottomTabNavigator(
     Setting: { screen: SettingStack,
       path: '/Settings',
       navigationOptions: {
+        title:'Settings',
         tabBarLabel: 'Settings',
         tabBarIcon: ({ tintColor, focused }) => (
           <Icon

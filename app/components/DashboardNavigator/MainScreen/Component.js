@@ -4,15 +4,8 @@ import Icon from "react-native-ionicons";
 
 class MainScreenComponent extends Component {
   static navigationOptions = {
-    drawerLabel: 'Main',
-    drawerIcon: ({ tintColor }) => (
-        <Icon
-            name="home"
-            size={24}
-            style={{ color: tintColor }}
-        />
-    )
-};
+    title: 'Home!',
+  };
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

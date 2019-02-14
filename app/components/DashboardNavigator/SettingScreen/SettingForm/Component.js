@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View,  FlatList,TouchableOpacity } from "react-native";
+import { View,  FlatList,TouchableOpacity,Alert  } from "react-native";
 import styles from './Styles'
 import {  ListItem} from "react-native-elements";
+
 const list = [
   {
     name: 'My Profile',
@@ -24,15 +25,15 @@ const list = [
   // more items
 ]
 class SettingFormComponent extends Component {
-  static navigationOptions = {
-    tabBarLabel: 'Setting!',
-  }; 
-  constructor() {
-    super();   
+  
+  constructor(props) {
+    super(props);   
     this.state = {
       dataSource: list,
-    };
-  }; 
+      logout:props.logout,
+    };   
+  };
+  
   renderSeparator = () => {
     return (
       <View
@@ -40,16 +41,31 @@ class SettingFormComponent extends Component {
       />
     );
   }; 
-  _onPress(item) {
-    this.props.navigation.navigate('Profile', {
-      itemId: item.id,
-      title: item.name,
-    });
-  }
+  _onPressButton = (text) => {
+    //Alert.alert(JSON.stringify(item.name));
+    if(text==='My Profile')
+    {
+      Alert.alert("Hello");
+    }
+    else if (text==='Change Password')
+    {
+
+    }
+    else if (text==='Notifications')
+    {
+
+    }
+    else
+    {
+     
+      this.setState({
+        logout: !this.state.logout});
+    }
+  };
   keyExtractor = (item, index) => index
   
   renderItem = ({ item }) => (
-    <TouchableOpacity    onPress={() => this._onPress(item)} >
+    <TouchableOpacity   activeOpacity={0.8}    onPress={() => this._onPressButton(item.name)} >
     <ListItem
       title={item.name}    
       leftIcon ={{name:item.avatar_url       

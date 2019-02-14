@@ -4,9 +4,7 @@ import {  ListItem } from "react-native-elements";
 import styles from './Styles'
 var data =[{title:"BOD", image:'person' },{title:"MIS", image:'person' },{title:"Credit Dept", image:'person' }, {title:"Marketing Dept", image: 'person'}, {title:"Customer Service", image: 'person'}];
 class RoomFormComponent extends Component {
-  static navigationOptions = {
-    tabBarLabel: 'Room!',
-  };
+  
    constructor() {
     super();   
     this.state = {

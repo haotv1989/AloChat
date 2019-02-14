@@ -4,6 +4,10 @@ import RoomForm from './RoomForm'
 import styles from './styles'
 
 export default class RoomScreenComponent extends Component {
+  static navigationOptions = {
+    title: 'Room!',
+    
+  };
   render() {
     return (
     <View>  
