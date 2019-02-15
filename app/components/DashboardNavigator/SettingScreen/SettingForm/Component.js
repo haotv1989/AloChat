@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View,  FlatList,TouchableOpacity,Alert  } from "react-native";
 import styles from './Styles'
+import PropTypes from 'prop-types'
 import {  ListItem} from "react-native-elements";
 
 const list = [
@@ -25,13 +26,14 @@ const list = [
   // more items
 ]
 class SettingFormComponent extends Component {
-  
+
   constructor(props) {
-    super(props);   
+    super(props);    
     this.state = {
       dataSource: list,
-      logout:props.logout,
-    };   
+      
+    };
+     
   };
   
   renderSeparator = () => {
@@ -45,27 +47,29 @@ class SettingFormComponent extends Component {
     //Alert.alert(JSON.stringify(item.name));
     if(text==='My Profile')
     {
-      Alert.alert("Hello");
+      Alert.alert("My Profile");
     }
     else if (text==='Change Password')
     {
+      Alert.alert("Change Password");
 
     }
     else if (text==='Notifications')
     {
-
+      Alert.alert("Notifications");
     }
     else
     {
+      //Alert.alert("Sign Out");
+      this._onPressButton =  this.props.logout;
+      ;
      
-      this.setState({
-        logout: !this.state.logout});
     }
   };
   keyExtractor = (item, index) => index
   
   renderItem = ({ item }) => (
-    <TouchableOpacity   activeOpacity={0.8}    onPress={() => this._onPressButton(item.name)} >
+    <TouchableOpacity Button   activeOpacity={0.8}    onPress={() => this._onPressButton(item.name)} >
     <ListItem
       title={item.name}    
       leftIcon ={{name:item.avatar_url       
@@ -86,5 +90,7 @@ class SettingFormComponent extends Component {
     )
   }
 }
-
+SettingFormComponent.propTypes = {
+  logout: PropTypes.func.isRequired
+}
 export default SettingFormComponent
