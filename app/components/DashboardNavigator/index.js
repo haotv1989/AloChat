@@ -86,6 +86,25 @@ const TabNavigator = createBottomTabNavigator(
   
 );
 
+TabNavigator.navigationOptions = ({ navigation }) => { 
+  let title; let focusedRouteName = navigation.state.routes[navigation.state.index].routeName; 
+  if (focusedRouteName === 'Home') 
+  { 
+    title = 'Home'; 
+// of course in this case it's the same, but do whatever you want here 
+} 
+else if (focusedRouteName === 'Settings') 
+{ 
+  title = 'Room';
+ } 
+ else
+ {
+  title='Settings';
+ }
+
+return { title, }; 
+};
+
 const AppContainer = createAppContainer(TabNavigator);
 export default AppContainer;
 
