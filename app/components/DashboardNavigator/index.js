@@ -10,8 +10,7 @@ import PasswordScreen from './PasswordScreen'
 
 const HomeStack = createStackNavigator({
   Main: { screen: MainScreen },
-  Chat: { screen: ChatScreen}
- 
+  Chat: { screen: ChatScreen} 
 });
 const RoomStack = createStackNavigator({
   Room: { screen: RoomScreen }
@@ -85,7 +84,6 @@ const TabNavigator = createBottomTabNavigator(
   }
   
 );
-
 TabNavigator.navigationOptions = ({ navigation }) => { 
   let title; let focusedRouteName = navigation.state.routes[navigation.state.index].routeName; 
   if (focusedRouteName === 'Home') 
@@ -107,4 +105,6 @@ return { title, };
 
 const AppContainer = createAppContainer(TabNavigator);
 export default AppContainer;
+
+
 

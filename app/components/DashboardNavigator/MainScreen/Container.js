@@ -1,22 +1,30 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { restoreSession } from '../../../store/session'
 
 import MainScreenComponent from './Component'
 
 const MainScreenContainer = props =>
-  <MainScreenComponent
-    loading={props.loading}
-    error={props.error} />
+  <MainScreenComponent 
+        navigation={props.navigation}
+        restoring={props.restoring}
+        logged={props.logged} />
 
 const mapStateToProps = state => ({
-  loading: state.session.loading,
-  error: state.session.error,
+  restoring: state.session.restoring,
+  logged: state.session.user != null,
 })
 
-MainScreenContainer.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.string,
+const mapDispatchToProps = {
+  restore: restoreSession
 }
 
-export default connect(mapStateToProps)(MainScreenContainer)
+MainScreenContainer.propTypes = {
+  navigation:  PropTypes.string.isRequired,
+  restoring: PropTypes.bool.isRequired,
+  logged: PropTypes.bool.isRequired,
+  restore: PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreenContainer)
