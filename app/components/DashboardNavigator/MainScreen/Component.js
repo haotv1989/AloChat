@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { View, Text,Button } from "react-native";
-import Icon from "react-native-ionicons";
+class MainScreenComponent extends Component {
 
-const MainScreenComponent = (props) =>(
-  
+  render() {
+    return (
   <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Main Screen</Text>
        <Button
           title="Go to Chat"       
-          onPress={() => props.navigation.navigate('Chat')}
+          onPress={() =>this.props.navigation.navigate('Chat')}
         />
-      </View>
-)
+      </View>)
+    }
+}
 export default MainScreenComponent
 
