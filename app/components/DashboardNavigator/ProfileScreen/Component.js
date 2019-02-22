@@ -1,9 +1,9 @@
 import React,{Component} from 'react'
-import { View,Text} from 'react-native'
+import { View,Text,Image,TouchableOpacity} from 'react-native'
 import styles from './Styles'
 import PropTypes from 'prop-types';
-
-class ProfileFormComponent extends Component {  
+import { withNavigation } from 'react-navigation';
+class ProfileComponent extends Component {  
    render() {
       return (
         <View style={styles.container}>
@@ -15,16 +15,14 @@ class ProfileFormComponent extends Component {
                 <Text style={styles.info}>UX Designer / Mobile developer</Text>
                 <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
                 
-                <TouchableOpacity style={styles.buttonContainer}>
-                  <Text>Opcion 1</Text>  
-                </TouchableOpacity>              
-                <TouchableOpacity style={styles.buttonContainer}>
-                  <Text>Opcion 2</Text> 
-                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonContainer}  onPress={ () => { this.props.navigation.navigate('EditProfile') } }>
+                  <Text>Change Information</Text>  
+                </TouchableOpacity>       
+               
               </View>
           </View>
         </View>
       );
     }
   }
-export default ProfileFormComponent
+export default  withNavigation(ProfileComponent)

@@ -1,0 +1,25 @@
+import React, { Component } from 'react'
+import ProfileFormComponent from './Component'
+import PropTypes from 'prop-types';
+const  ProfileFormContainer  = props =>
+<ProfileFormComponent 
+      navigation={props.navigation}
+      restoring={props.restoring}
+      logged={props.logged} />
+
+const mapStateToProps = state => ({
+restoring: state.session.restoring,
+logged: state.session.user != null,
+})
+
+const mapDispatchToProps = {
+restore: restoreSession
+}
+
+MainScreenContainer.propTypes = {
+navigation:  PropTypes.string.isRequired,
+restoring: PropTypes.bool.isRequired,
+logged: PropTypes.bool.isRequired,
+restore: PropTypes.func.isRequired
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileFormContainer)

@@ -4,13 +4,14 @@ import styles from './Styles'
 import PropTypes from 'prop-types'
 import {ListItem} from "react-native-elements";
 import ListDataMenu from '../MockData/DataMenu'
+import { withNavigation } from 'react-navigation';
 
 class SettingFormComponent extends Component {
  
-  constructor(props) {
-    super(props);    
+  constructor() {
+    super();    
     this.state = {
-      dataSource: ListDataMenu  
+      dataSource: ListDataMenu       
     };
      
   };
@@ -21,12 +22,12 @@ class SettingFormComponent extends Component {
         style={styles.separator}
       />
     );
-  }; 
-  
+  };   
   _onPressButton = (text) => {
+    //const { navigate }= this.props.navigation;
     switch(text) {
       case 'My Profile':
-        return this._onPressButton=this.props.navigation.navigate('Profile');
+        return this._onPressButton= this.props.navigation.navigate('Profile');
       case 'Change Password':
         return Alert.alert("Change Password");
       case 'Notifications':
@@ -58,4 +59,7 @@ class SettingFormComponent extends Component {
     )
   }
 }
-export default SettingFormComponent
+SettingFormComponent.propTypes = {
+  navigation: PropTypes.object.isRequired
+}
+export default withNavigation (SettingFormComponent)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text,Button } from "react-native";
+import PropTypes from 'prop-types'
 class MainScreenComponent extends Component {
 
   render() {
@@ -12,6 +13,9 @@ class MainScreenComponent extends Component {
         />
       </View>)
     }
+}
+MainScreenComponent.propTypes = {
+  navigation: PropTypes.object.isRequired
 }
 export default MainScreenComponent
 
