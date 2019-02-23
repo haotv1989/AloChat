@@ -1,21 +1,27 @@
 import React,{Component} from 'react'
-import { View,Text,Image,TouchableOpacity} from 'react-native'
+import { View,Text,Image,TouchableOpacity,TouchableHighlight} from 'react-native'
 import styles from './Styles'
 import PropTypes from 'prop-types';
-import User from '../ProfileStructure'
 import t from 'tcomb-form-native'; 
+import { sendMessage } from '../../../../store/chat/actions';
 
 var Form = t.form.Form;
 var Gender = t.enums({
   M: 'Male',
   F: 'Female'
 });
-var User = t.struct({
+var statusAcount = t.enums({
+  On: 'Online',
+  Off: 'Offline',
+  idle:'Idle'
+});
+const User = t.struct({
   displayName : t.String,
   sex: Gender,
   staffCode: t.String,
   birthDate: t.Date,
-  status: t.maybe(t.t.String)
+  status:t.maybe(t.String),
+  statusAccount: statusAcount
 });
 var options = {
   fields: {
@@ -27,7 +33,12 @@ var options = {
     staffCode: { placeholder: 'UserName - Leasys',
     error: 'Insert a UserName - Leasys'},  
     birthDate: {
+      config: {
+        format: (date) => moment(date).format('DD/MM/YYYY'), 
+      },
       mode: 'date' // display the Date field as a DatePickerAndroid
+      ,
+      blurOnSubmit: true
       ,
       error: 'Choose your birth date'}
     },
@@ -35,6 +46,11 @@ var options = {
   };
 
 class ProfileFormComponent extends Component {  
+  constructor (props) {
+    super(props);
+
+    this.onPress = this.onPress.bind(this);
+  }
   onPress = () => {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
@@ -76,7 +92,7 @@ class ProfileFormComponent extends Component {
           type={User}
           options={options}
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>

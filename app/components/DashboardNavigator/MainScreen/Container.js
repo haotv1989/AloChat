@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { restoreSession } from '../../../store/session'
-
 import MainScreenComponent from './Component'
 
 const MainScreenContainer = props =>

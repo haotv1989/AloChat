@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ProfileFormComponent from './Component'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { restoreSession } from '../../../../store/session'
 const  ProfileFormContainer  = props =>
 <ProfileFormComponent 
       navigation={props.navigation}
@@ -16,7 +18,7 @@ const mapDispatchToProps = {
 restore: restoreSession
 }
 
-MainScreenContainer.propTypes = {
+ProfileFormContainer.propTypes = {
 navigation:  PropTypes.string.isRequired,
 restoring: PropTypes.bool.isRequired,
 logged: PropTypes.bool.isRequired,

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import ProfileFormComponent from './Component'
+import ProfileComponent from './Component'
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { restoreSession } from '../../../store/session'
 const ProfileContainer = props =>
   <ProfileComponent
   navigation={props.navigation}
@@ -13,7 +15,7 @@ const mapStateToProps = state => ({
   error: state.session.error,
 })
 const mapDispatchToProps = {
-  logout: logoutUser
+  restore: restoreSession
 }
 ProfileContainer.propTypes = {
   navigation:  PropTypes.string.isRequired,
