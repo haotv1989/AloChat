@@ -3,8 +3,22 @@ import { View,Text,Image,TouchableOpacity,TouchableHighlight} from 'react-native
 import styles from './Styles'
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native'; 
-import { sendMessage } from '../../../../store/chat/actions';
-
+import ImageFactory from 'react-native-image-picker-form';
+import ImagePicker from 'react-native-image-crop-picker';
+ImagePicker.openPicker({
+  width: 300,
+  height: 400,
+  cropping: true
+}).then(image => {
+  console.log(image);
+});
+ImagePicker.openCamera({
+  width: 300,
+  height: 400,
+  cropping: true,
+}).then(image => {
+  console.log(image);
+});
 var Form = t.form.Form;
 var Gender = t.enums({
   M: 'Male',
@@ -16,6 +30,7 @@ var statusAcount = t.enums({
   idle:'Idle'
 });
 const User = t.struct({
+  urlPath:t.String,
   displayName : t.String,
   sex: Gender,
   staffCode: t.String,
@@ -23,14 +38,28 @@ const User = t.struct({
   status:t.maybe(t.String),
   statusAccount: statusAcount
 });
-var options = {
+var options = {  
+  auto: 'placeholders',
+  
   fields: {
-    displayName: { placeholder: 'Display Name'
-    ,
+    urlPath:{
+      config: {
+        title: 'Select image',
+        options: ['Open camera', 'Select from gallery', 'Cancel']
+        // Used on Android to style BottomSheet
+        
+      },
+      error: 'No image provided',
+      factory: ImageFactory
+    },
+    displayName: { //placeholder: 'Display Name'
+    
     error: 'Insert a Display Name'
   },
-    sex: { placeholder: 'Gender'},
-    staffCode: { placeholder: 'UserName - Leasys',
+    sex: { //placeholder: 'Gender'
+    label: 'Gender',
+  },
+    staffCode: { //placeholder: 'UserName - Leasys',
     error: 'Insert a UserName - Leasys'},  
     birthDate: {
       config: {
@@ -40,15 +69,21 @@ var options = {
       ,
       blurOnSubmit: true
       ,
-      error: 'Choose your birth date'}
-    },
-    status: { placeholder: 'How do you feel, today!!'},
-  };
-
+      error: 'Choose your birth date'
+    }
+    ,
+    status: { 
+      placeholder: 'How do you feel, today!!'
+  },
+  statusAccount: {
+    hidden: true
+  },
+  }};
+ 
 class ProfileFormComponent extends Component {  
   constructor (props) {
     super(props);
-
+   
     this.onPress = this.onPress.bind(this);
   }
   onPress = () => {
@@ -87,9 +122,10 @@ class ProfileFormComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-       <Form
+       <Form    style=    {styles.fontCamera}
           ref="form"
           type={User}
+          //value={this.state.value}
           options={options}
         />
         <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>

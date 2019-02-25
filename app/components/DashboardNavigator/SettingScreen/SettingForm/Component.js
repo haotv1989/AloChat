@@ -4,16 +4,17 @@ import styles from './Styles'
 import PropTypes from 'prop-types'
 import {ListItem} from "react-native-elements";
 import ListDataMenu from '../MockData/DataMenu'
-import { withNavigation } from 'react-navigation';
+import { withNavigation,NavigationActions } from 'react-navigation';
 
 class SettingFormComponent extends Component {
  
   constructor() {
     super();    
     this.state = {
-      dataSource: ListDataMenu       
-    };
-     
+      dataSource: ListDataMenu
+             
+    };    
+    this._onPressButton = this._onPressButton.bind(this);
   };
   
   renderSeparator = () => {

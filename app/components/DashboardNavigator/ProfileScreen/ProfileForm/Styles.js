@@ -20,6 +20,9 @@ export default StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
-  }
+  },
+  fontCamera: {
+    fontFamily: 'Roboto',
+  },
   });
 

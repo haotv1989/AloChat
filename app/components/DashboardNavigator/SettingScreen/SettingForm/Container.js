@@ -14,6 +14,7 @@ const SettingFormContainer = props =>
 const mapStateToProps = state => ({
   loading: state.session.loading, 
   error: state.session.error,
+  navigation:state.navigation
 })
 const mapDispatchToProps = {
   logout: logoutUser
