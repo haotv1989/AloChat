@@ -22,6 +22,7 @@ ProfileFormContainer.propTypes = {
 navigation:  PropTypes.string.isRequired,
 restoring: PropTypes.bool.isRequired,
 logged: PropTypes.bool.isRequired,
-restore: PropTypes.func.isRequired
+restore: PropTypes.func.isRequired,
+onPress: PropTypes.func.isRequired
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileFormContainer)

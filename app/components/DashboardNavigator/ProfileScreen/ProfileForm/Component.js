@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import t from 'tcomb-form-native'; 
 import ImageFactory from 'react-native-image-picker-form';
 import ImagePicker from 'react-native-image-crop-picker';
+
 ImagePicker.openPicker({
   width: 300,
   height: 400,
@@ -24,6 +25,7 @@ var Gender = t.enums({
   M: 'Male',
   F: 'Female'
 });
+var moment = require('moment');
 var statusAcount = t.enums({
   On: 'Online',
   Off: 'Offline',
@@ -78,19 +80,31 @@ var options = {
   statusAccount: {
     hidden: true
   },
-  }};
- 
+  }}; 
 class ProfileFormComponent extends Component {  
   constructor (props) {
     super(props);
-   
+    this.state = {
+			form: {
+				urlPath: null,
+        displayName: null,
+        sex: null, 
+        staffCode: null,
+        birthDate: null,
+        status: null,
+        statusAccount: null,
+			},
+			isValid: false
+		};
     this.onPress = this.onPress.bind(this);
   }
   onPress = () => {
     // call getValue() to get the values of the form
     var value = this.refs.form.getValue();
-    if (value) { // if validation fails, value will be null
-      console.log(value); // value here is an instance of Person
+    if (value) { 
+      // if validation fails, value will be null
+      //console.log(value); // value here is an instance of Person
+
       this.clearForm();
     }
   };
@@ -122,15 +136,17 @@ class ProfileFormComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
+      <ScrollView keyboardShouldPersistTaps={'handled'}>
        <Form    style=    {styles.fontCamera}
           ref="form"
           type={User}
-          //value={this.state.value}
+          value={this.state.form}
           options={options}
         />
         <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
+        </ScrollView>
       </View>
     );
   }
