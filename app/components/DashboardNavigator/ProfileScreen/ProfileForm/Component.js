@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { View,Text,Image,TouchableOpacity,TouchableHighlight} from 'react-native'
+import { View,Text,Alert,ScrollView,TouchableHighlight} from 'react-native'
 import styles from './Styles'
 import PropTypes from 'prop-types';
 import t from 'tcomb-form-native'; 
@@ -20,6 +20,7 @@ ImagePicker.openCamera({
 }).then(image => {
   console.log(image);
 });
+
 var Form = t.form.Form;
 var Gender = t.enums({
   M: 'Male',
@@ -80,12 +81,15 @@ var options = {
   statusAccount: {
     hidden: true
   },
+  userId: {
+    hidden: true
+  },
   }}; 
 class ProfileFormComponent extends Component {  
   constructor (props) {
     super(props);
     this.state = {
-			form: {
+			form: {      
 				urlPath: null,
         displayName: null,
         sex: null, 
@@ -94,20 +98,26 @@ class ProfileFormComponent extends Component {
         status: null,
         statusAccount: null,
 			},
-			isValid: false
-		};
-    this.onPress = this.onPress.bind(this);
-  }
-  onPress = () => {
-    // call getValue() to get the values of the form
-    var value = this.refs.form.getValue();
-    if (value) { 
-      // if validation fails, value will be null
-      //console.log(value); // value here is an instance of Person
+      isValid: false,
+      options:{options},
+      
+		};   
+    //this.options = { options};
+    this.handleButtonPress = () => {
+    
+      var value = this.refs.form.getValue();     
+      if (value) {     
+      this.props.updateProfile( this.state.form);
+      console.log(this.state.form);
+      Alert.alert('You have unsaved changes.', 'Are you sure you want to leave?');
+     this.clearForm(); 
+      }
+    }; 
+     
 
-      this.clearForm();
-    }
-  };
+  }
+  
+  
   getInitialState= () => {
     return {
       options: options,
@@ -115,16 +125,7 @@ class ProfileFormComponent extends Component {
     }
   };
 
-  onChange(value) {    
-    var options = t.update(this.state.options, {
-      fields: {
-        displayName: {
-          editable: {'$set': !value.disable}
-        }
-      }
-    });
-    this.setState({options: options, value: value});
-  }
+ 
   clearForm() {
     // clear content from all textbox
     this.setState({ value: null });
@@ -141,14 +142,18 @@ class ProfileFormComponent extends Component {
           ref="form"
           type={User}
           value={this.state.form}
-          options={options}
+          options={options}         
         />
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button}   onPress={this.handleButtonPress.bind(this)} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
         </ScrollView>
       </View>
     );
   }
+}
+ProfileFormComponent.propTypes = {  
+  navigation:  PropTypes.object.isRequired,
+  updateProfile: PropTypes.func.isRequired
 }
 export default ProfileFormComponent

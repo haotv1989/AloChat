@@ -20,7 +20,7 @@ const mapDispatchToProps = {
 }
 
 MainScreenContainer.propTypes = {
-  navigation:  PropTypes.string.isRequired,
+  navigation: PropTypes.object.isRequired,
   restoring: PropTypes.bool.isRequired,
   logged: PropTypes.bool.isRequired,
   restore: PropTypes.func.isRequired

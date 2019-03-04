@@ -3,19 +3,23 @@ import firebaseService from '../../services/firebase'
 
 const FIREBASE_REF_PROFILE = firebaseService.database().ref('Profiles')
 const FIREBASE_REF_MESSAGES_LIMIT = 1
-export const sendMessage = profile => {
+export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
+  birthDate,status,statusAccount) => {
   return (dispatch) => {
     dispatch(profileMessageLoading())
 
     let currentUser = firebaseService.auth().currentUser
     let createdAt = new Date().getTime()
     let profileMessage = {
-      text: profile,
-      createdAt: createdAt,
-      user: {
-        id: currentUser.uid,
-        email: currentUser.email
-      }
+      UserID: currentUser.uid,
+      Image_Avatar:urlPath,
+      DisPlayName:displayName,
+      Sex:sex,
+      StaffCode:staffCode,
+      BirthDate:birthDate,
+      Status:status,
+      StatusAccount:statusAccount,
+      UpdatedAt: createdAt,     
     }
 
     FIREBASE_REF_PROFILE.push().set(profileMessage, (error) => {

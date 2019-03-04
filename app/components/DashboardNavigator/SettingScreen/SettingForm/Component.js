@@ -61,6 +61,7 @@ class SettingFormComponent extends Component {
   }
 }
 SettingFormComponent.propTypes = {
+  logout:PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired
 }
 export default withNavigation (SettingFormComponent)

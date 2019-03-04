@@ -20,7 +20,7 @@ const mapDispatchToProps = {
   logout: logoutUser
 }
 SettingFormContainer.propTypes = {
-  navigation:  PropTypes.string.isRequired,
+  navigation:  PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
   error: PropTypes.string,

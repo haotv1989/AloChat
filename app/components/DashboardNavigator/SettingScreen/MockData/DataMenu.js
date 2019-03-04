@@ -14,7 +14,7 @@ const Items = [
     },
     {
       name: 'Sign Out',
-      avatar_url: 'log-out',
+      avatar_url: 'arrow-drop-down-circle',
       
     },
     // more items
