@@ -21,6 +21,33 @@ ImagePicker.openCamera({
   console.log(image);
 });
 
+ImagePicker.showImagePicker(options.urlPath, (response) => {
+  console.log('Response = ', response);
+
+  if (response.didCancel) {
+    console.log('User cancelled image picker');
+  }
+  else if (response.error) {
+    console.log('ImagePicker Error: ', response.error);
+  }
+  else if (response.customButton) {
+    console.log('User tapped custom button: ', response.customButton);
+  }
+  else {
+    // let source = { uri: response.uri };
+    this.setState({urlPath: response.uri})
+
+    // You can also display the image using data:
+    // let image_uri = { uri: 'data:image/jpeg;base64,' + response.data };
+
+  this.props.uploadImage(response.uri)
+    .then(url => { alert('uploaded'); this.setState({image_uri: url}) })
+    .catch(error => console.log(error))
+
+  }
+});
+
+
 var Form = t.form.Form;
 var Gender = t.enums({
   M: 'Male',
@@ -48,7 +75,11 @@ var options = {
     urlPath:{
       config: {
         title: 'Select image',
-        options: ['Open camera', 'Select from gallery', 'Cancel']
+        options: ['Open camera', 'Select from gallery', 'Cancel'],
+        storageOptions: {
+          skipBackup: true,
+          path: 'images'
+        }
         // Used on Android to style BottomSheet
         
       },
@@ -102,8 +133,10 @@ class ProfileFormComponent extends Component {
       options:{options},
       
 		};        
-    
+    this.getImage = this.getImage.bind(this)
   }
+
+
   onChange = (value)=> {
     this.setState({value: value});
   }
@@ -164,6 +197,7 @@ class ProfileFormComponent extends Component {
 }
 ProfileFormComponent.propTypes = {  
   navigation:  PropTypes.object.isRequired,
-  updateProfile: PropTypes.func.isRequired
+  updateProfile: PropTypes.func.isRequired,
+  uploadImage:PropTypes.func.isRequired
 }
 export default ProfileFormComponent
