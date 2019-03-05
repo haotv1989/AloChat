@@ -3,7 +3,7 @@ export const firebaseConfig = {
     authDomain: 'appchatchailease.firebaseapp.com',
     databaseURL: 'https://appchatchailease.firebaseio.com',
     projectId: 'appchatchailease',
-    storageBucket: '',
+    storageBucket: 'appchatchailease.appspot.com',
     messagingSenderId: '425094047298',
 }
 

@@ -101,22 +101,31 @@ class ProfileFormComponent extends Component {
       isValid: false,
       options:{options},
       
-		};   
-    //this.options = { options};
-    this.handleButtonPress = () => {
+		};        
     
-      var value = this.refs.form.getValue();     
-      if (value) {     
-      this.props.updateProfile( this.state.form);
-      console.log(this.state.form);
-      Alert.alert('You have unsaved changes.', 'Are you sure you want to leave?');
-     this.clearForm(); 
-      }
-    }; 
-     
-
   }
-  
+  onChange = (value)=> {
+    this.setState({value: value});
+  }
+  handleSubmit = () => {
+    var value = this.state.value;
+    // console.log("value form");
+    // console.log(this.state.value);
+    // console.log("value");
+    // console.log(value);
+    if (value) {
+      value.statusAccount='On';
+      //console.log(value.statusAccount);
+      console.log(value.status);
+      if (value.status)
+      {
+        value.status='';
+      }
+    this.props.updateProfile( value.urlPath, value.displayName,value.sex, value.staffCode,value.birthDate,value.status, value.statusAccount );
+      clearForm();
+    }
+
+  };
   
   getInitialState= () => {
     return {
@@ -139,12 +148,13 @@ class ProfileFormComponent extends Component {
       <View style={styles.container}>
       <ScrollView keyboardShouldPersistTaps={'handled'}>
        <Form    style=    {styles.fontCamera}
-          ref="form"
+         ref='form'
           type={User}
-          value={this.state.form}
+          value={this.state.value}
+          onChange={this.onChange}
           options={options}         
         />
-        <TouchableHighlight style={styles.button}   onPress={this.handleButtonPress.bind(this)} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.button}   onPress={this.handleSubmit} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
         </ScrollView>

@@ -7,6 +7,10 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
   birthDate,status,statusAccount) => {
   return (dispatch) => {
     dispatch(profileMessageLoading())
+    
+    // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
+    // StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+    // uploadTask = riversRef.putFile(file);
 
     let currentUser = firebaseService.auth().currentUser
     let createdAt = new Date().getTime()
