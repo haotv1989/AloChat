@@ -4,7 +4,7 @@ const initialState = {
   sending: false,
   sendingError: null,
   message: '',
-  profiles: {},
+  profile: {},
   loadMessagesError: null
 }
 

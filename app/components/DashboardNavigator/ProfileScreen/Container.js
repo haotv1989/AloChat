@@ -18,7 +18,7 @@ class ProfileContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  profiles: state.profile,
+  profile: state.profile,
   error: state.profile.loadMessagesError
 })
 
@@ -27,7 +27,7 @@ const mapDispatchToProps = {
 }
 
 ProfileContainer.propTypes = {
- profiles: PropTypes.object,
+ profile: PropTypes.object,
   error: PropTypes.string, 
   navigation:PropTypes.object.isRequired
 }
