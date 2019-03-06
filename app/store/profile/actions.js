@@ -1,6 +1,7 @@
 import * as types from './actionTypes'
 import firebaseService from '../../services/firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
+import {Platform} from 'react-native';
 
 const Blob = RNFetchBlob.polyfill.Blob
 const fs = RNFetchBlob.fs
@@ -17,7 +18,7 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
     // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
     // StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
     // uploadTask = riversRef.putFile(file);
-   
+    urlPath=uploadImage(urlPath);
     let currentUser = firebaseService.auth().currentUser    
     let createdAt = new Date().getTime()
     let profileMessage = {
@@ -26,32 +27,51 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
       DisplayName:displayName,
       Sex:sex,
       StaffCode:staffCode,
-      BirthDate:birthDate,
+      BirthDate:birthDate ,
       Status:status,
       StatusAccount:statusAccount,
       UpdatedAt: createdAt,     
     }
-
-    FIREBASE_REF_PROFILE.child(currentUser.uid).push().set(profileMessage, (error) => {
-      if (error) {
-        dispatch(profileMessageError(error.message))
-      } else {
-        dispatch(profileMessageSuccess())
-      }
-    })
+    //uploadImage(urlPath);
+    FIREBASE_REF_PROFILE.child(currentUser.uid).once("value", snapshot => {
+      if (snapshot.exists()){
+        FIREBASE_REF_PROFILE.child(currentUser.uid).update().set(profileMessage, (error) => {
+          if (error) {
+            dispatch(profileMessageError(error.message))
+          } else {
+            dispatch(profileMessageSuccess())
+          }
+        })
+       }
+       else
+       {
+        FIREBASE_REF_PROFILE.child(currentUser.uid).push().set(profileMessage, (error) => {
+          if (error) {
+            dispatch(profileMessageError(error.message))
+          } else {
+            dispatch(profileMessageSuccess())
+          }
+        })
+         
+       }
+   })
+   
   }
 }
 
-export const updateMessage = text => {
+export const updateMessage =  (urlPath,displayName,sex,staffCode,
+  birthDate,status,statusAccount) => {
   return (dispatch) => {
-    dispatch(profileUpdateMessage(text))
+    dispatch(profileUpdateMessage(urlPath,displayName,sex,staffCode,
+      birthDate,status,statusAccount))
   }
 }
 
-export const loadMessages = () => {
+export const loadProfileMessages = () => {
   return (dispatch) => {
-    FIREBASE_REF_PROFILE.limitToLast(FIREBASE_REF_MESSAGES_LIMIT).on('value', (snapshot) => {
-      dispatch(loadMessagesSuccess(snapshot.val()))
+    let currentUser = firebaseService.auth().currentUser  
+    FIREBASE_REF_PROFILE.child(currentUser.uid).on('value', (snapshot) => {
+      dispatch(profileUpdateMessage(snapshot.val()))
     }, (errorObject) => {
       dispatch(loadMessagesError(errorObject.message))
     })

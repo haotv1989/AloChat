@@ -21,31 +21,7 @@ ImagePicker.openCamera({
   console.log(image);
 });
 
-ImagePicker.showImagePicker(options.urlPath, (response) => {
-  console.log('Response = ', response);
 
-  if (response.didCancel) {
-    console.log('User cancelled image picker');
-  }
-  else if (response.error) {
-    console.log('ImagePicker Error: ', response.error);
-  }
-  else if (response.customButton) {
-    console.log('User tapped custom button: ', response.customButton);
-  }
-  else {
-    // let source = { uri: response.uri };
-    this.setState({urlPath: response.uri})
-
-    // You can also display the image using data:
-    // let image_uri = { uri: 'data:image/jpeg;base64,' + response.data };
-
-  this.props.uploadImage(response.uri)
-    .then(url => { alert('uploaded'); this.setState({image_uri: url}) })
-    .catch(error => console.log(error))
-
-  }
-});
 
 
 var Form = t.form.Form;
@@ -133,7 +109,7 @@ class ProfileFormComponent extends Component {
       options:{options},
       
 		};        
-    this.getImage = this.getImage.bind(this)
+    //this.getImage = this.getImage.bind(this)
   }
 
 
@@ -154,8 +130,8 @@ class ProfileFormComponent extends Component {
       {
         value.status='';
       }
-    this.props.updateProfile( value.urlPath, value.displayName,value.sex, value.staffCode,value.birthDate,value.status, value.statusAccount );
-      clearForm();
+    this.props.updateProfile( value.urlPath, value.displayName,value.sex, value.staffCode, moment(value.birthDate).toDate().getTime() ,value.status, value.statusAccount ); 
+    this.clearForm;
     }
 
   };
@@ -197,7 +173,7 @@ class ProfileFormComponent extends Component {
 }
 ProfileFormComponent.propTypes = {  
   navigation:  PropTypes.object.isRequired,
-  updateProfile: PropTypes.func.isRequired,
-  uploadImage:PropTypes.func.isRequired
+  updateProfile: PropTypes.func.isRequired
+ 
 }
 export default ProfileFormComponent

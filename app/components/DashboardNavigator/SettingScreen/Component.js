@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SettingForm from './SettingForm'
+import PropTypes from 'prop-types'
  class SettingScreenComponent extends Component {
   static navigationOptions = {
     title: 'Setting!',
@@ -9,6 +10,9 @@ import SettingForm from './SettingForm'
       <SettingForm/>
       )
   }
+}
+SettingScreenComponent.propTypes = {
+  navigation:  PropTypes.object.isRequired
 }
 export default SettingScreenComponent
 
