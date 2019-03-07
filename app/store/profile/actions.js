@@ -3,12 +3,13 @@ import firebaseService from '../../services/firebase'
 import RNFetchBlob from 'react-native-fetch-blob'
 import {Platform} from 'react-native';
 
+
 const Blob = RNFetchBlob.polyfill.Blob
 const fs = RNFetchBlob.fs
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
 window.Blob = Blob
 
-const FIREBASE_REF_PROFILE = firebaseService.database().ref('Profiles')
+const FIREBASE_REF_PROFILE = firebaseService.database().ref('Profiles/')
 const FIREBASE_REF_MESSAGES_LIMIT = 1
 export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
   birthDate,status,statusAccount) => {
@@ -33,7 +34,7 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
       UpdatedAt: createdAt,     
     }
     //uploadImage(urlPath);
-    FIREBASE_REF_PROFILE.child(currentUser.uid).once("value", snapshot => {
+    FIREBASE_REF_PROFILE.child(currentUser.uid).on("value", snapshot => {
       if (snapshot.exists()){
         FIREBASE_REF_PROFILE.child(currentUser.uid).update().set(profileMessage, (error) => {
           if (error) {
@@ -70,10 +71,13 @@ export const updateMessage =  (urlPath,displayName,sex,staffCode,
 export const loadProfileMessages = () => {
   return (dispatch) => {
     let currentUser = firebaseService.auth().currentUser  
-    FIREBASE_REF_PROFILE.child(currentUser.uid).on('value', (snapshot) => {
-      dispatch(profileUpdateMessage(snapshot.val()))
+    FIREBASE_REF_PROFILE.child(currentUser.uid).once('value', (snapshot) => {
+      dispatch(loadProfileMessagesSuccess(snapshot.val()))
+      console.log('Reducer- get data')
+      console.log(snapshot.val())
+      //dispatch(profileUpdateMessage(currentUser))
     }, (errorObject) => {
-      dispatch(loadMessagesError(errorObject.message))
+      dispatch(loadProfileMessagesError(errorObject.message))
     })
   }
 }
@@ -104,6 +108,7 @@ export const uploadImage=(uri, mime = 'application/octet-stream')=> {
     })
   })
 }
+
 const profileMessageLoading = () => ({
   type: types.PROFILE_MESSAGE_LOADING
 })
@@ -120,5 +125,14 @@ const profileMessageError = error => ({
 const profileUpdateMessage = profile => ({
   type: types.PROFILE_MESSAGE_UPDATE,
   profile
+})
+const loadProfileMessagesSuccess = profile => ({
+  type: types.PROFILE_LOAD_MESSAGES_SUCCESS,
+  profile
+})
+
+const loadProfileMessagesError = error => ({
+  type: types.PROFILE_LOAD_MESSAGES_ERROR,
+  error
 })
 

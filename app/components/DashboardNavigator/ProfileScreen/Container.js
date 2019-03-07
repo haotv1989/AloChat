@@ -6,10 +6,19 @@ import PropTypes from 'prop-types';
 import { loadProfileMessages } from '../../../store/profile/actions'
 import { getProfileItems } from '../../../store/profile/selectors'
 
-class ProfileContainer extends Component { 
 
+
+class ProfileContainer extends Component { 
+  componentDidMount() {
+    this.props.loadProfileMessages()
+    console.log('data container:');
+    //console.log(this.state.profile);
+  }
   render() {
-    const data = getProfileItems(this.props.profiles).reverse();
+    const data = getProfileItems(this.props.profile).reverse();
+    //const data = this.props.profile
+    console.log('--Data--Container---');
+    console.log(data);
     return (
       <ProfileComponent
         data={data} />
@@ -18,7 +27,7 @@ class ProfileContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  profile: state.profile.profile,
   error: state.profile.loadMessagesError
 })
 
