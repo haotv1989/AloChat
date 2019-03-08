@@ -10,13 +10,10 @@ import { getProfileItems } from '../../../store/profile/selectors'
 
 class ProfileContainer extends Component { 
   componentDidMount() {
-    this.props.loadProfileMessages()
-    console.log('data container:');
-    //console.log(this.state.profile);
+    this.props.loadProfileMessages()   
   }
   render() {
-    const data = getProfileItems(this.props.profile).reverse();
-    //const data = this.props.profile
+    const data = getProfileItems(this.props.profile).reverse(); 
     console.log('--Data--Container---');
     console.log(data);
     return (

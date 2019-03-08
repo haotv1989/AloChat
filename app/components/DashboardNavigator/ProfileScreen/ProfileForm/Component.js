@@ -173,7 +173,8 @@ class ProfileFormComponent extends Component {
 }
 ProfileFormComponent.propTypes = {  
   navigation:  PropTypes.object.isRequired,
-  updateProfile: PropTypes.func.isRequired
+  updateProfile: PropTypes.func.isRequired,
+  loadProfile:PropTypes.func.isRequired
  
 }
 export default ProfileFormComponent

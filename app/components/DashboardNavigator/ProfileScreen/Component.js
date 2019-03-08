@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
 
 loadData = (data)=> {
+  console.log('Data component:')
   console.log(data)
 }
 class ProfileComponent extends Component { 
@@ -14,10 +15,15 @@ class ProfileComponent extends Component {
       
     //this.getImage = this.getImage.bind(this)
   }
+  componentDidUpdate(prevProps) {
+    if (!prevProps.sendingError && this.props.sendingError) {
+      Alert.alert(translations.t('error'), this.props.sendingError)
+    }
+  }
  
    render() {
     const data = this.props.data;  
-    loadData(data);
+    //loadData(data);
     //Alert.alert(this.props.data); 
        
       return (
@@ -26,15 +32,15 @@ class ProfileComponent extends Component {
            
             </View>
             <View>
-            <Image style={styles.avatar} source={{uri: this.props.data.Image_Avatar}}/>
+            <Image style={styles.avatar} source={{uri: data.Image_Avatar}}/>
             <Badge  status="success"  style={{ position: 'absolute', top: -4, right: -4 }}  />
              </View>
           
             <View style={styles.body}>
               <View style={styles.bodyContent}>
-                <Text style={styles.name}>{this.props.data.DisplayName}</Text>
-                <Text style={styles.info}>{this.props.data.Sex} / { this.props.data.BirthDate}</Text>
-                <Text style={styles.description}>{this.props.data.Status}</Text>
+                <Text style={styles.name}>{data.DisplayName}</Text>
+                <Text style={styles.info}>{data.Sex} / { data.BirthDate}</Text>
+                <Text style={styles.description}>{data.Status}</Text>
                 
                 <TouchableOpacity style={styles.buttonContainer}  onPress={ () => { this.props.navigation.navigate('EditProfile') } }>
                   <Text>Change Information</Text>  

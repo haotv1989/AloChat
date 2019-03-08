@@ -9,7 +9,7 @@ const fs = RNFetchBlob.fs
 window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
 window.Blob = Blob
 
-const FIREBASE_REF_PROFILE = firebaseService.database().ref('Profiles/')
+const FIREBASE_REF_PROFILE = firebaseService.database().ref('Profiles')
 const FIREBASE_REF_MESSAGES_LIMIT = 1
 export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
   birthDate,status,statusAccount) => {
@@ -34,7 +34,7 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
       UpdatedAt: createdAt,     
     }
     //uploadImage(urlPath);
-    FIREBASE_REF_PROFILE.child(currentUser.uid).on("value", snapshot => {
+    FIREBASE_REF_PROFILE.orderByChild("UserID").equalTo(currentUser.uid).on("value", snapshot => {
       if (snapshot.exists()){
         FIREBASE_REF_PROFILE.child(currentUser.uid).update().set(profileMessage, (error) => {
           if (error) {
@@ -46,7 +46,7 @@ export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
        }
        else
        {
-        FIREBASE_REF_PROFILE.child(currentUser.uid).push().set(profileMessage, (error) => {
+        FIREBASE_REF_PROFILE.push().set(profileMessage, (error) => {
           if (error) {
             dispatch(profileMessageError(error.message))
           } else {
@@ -71,7 +71,7 @@ export const updateMessage =  (urlPath,displayName,sex,staffCode,
 export const loadProfileMessages = () => {
   return (dispatch) => {
     let currentUser = firebaseService.auth().currentUser  
-    FIREBASE_REF_PROFILE.child(currentUser.uid).once('value', (snapshot) => {
+    FIREBASE_REF_PROFILE.orderByChild("UserID").equalTo(currentUser.uid).once('value', (snapshot) => {
       dispatch(loadProfileMessagesSuccess(snapshot.val()))
       console.log('Reducer- get data')
       console.log(snapshot.val())
