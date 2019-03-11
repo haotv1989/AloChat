@@ -29,39 +29,29 @@ class ProfileComponent extends Component {
   }
   
  
-   render() {    
-      
-      
-      const  data =this.props.data;
-      console.log(' Data component profile:')
-      console.log(data)
-   
-    const displayName =data.map(data => data.DisplayName)
+   render() {  
+   const displayName =data.map(data => data.DisplayName)
     const birthDate=  moment(data.map(data => data.BirthDate)).format('DD/MM/YYYY')
     const image_Avatar= data.map(data => data.Image_Avatar);
-    const  sex=data.map(data => data.Sex)
+    const  gender=data.map(data => data.Sex)
     const staffCode=  data.map(data => data.StaffCode)
     const  status=data.map(data => data.Status)
     const statusAccount= data.map(data => data.StatusAccount)
-        
-        console.log(' DisplayName component profile:')
-        console.log(displayName)
-        console.log(birthDate)
-      return (
+    return (
 
         <View style={styles.container}>
             <View style={styles.header}>           
             </View>
-            <View>
-            <Image style={styles.avatar} source={{uri: image_Avatar  ? 'http://www.chailease.com.vn//images/new-logo.png': image_Avatar}}/>
+           
+            <Image style={styles.avatar} source={{uri: image_Avatar  ? 'https://bootdey.com/img/Content/avatar/avatar6.png': image_Avatar}}/>
             <Badge  status="success"  style={{ position: 'absolute', top: -4, right: -4 }}  />
-             </View>
+             
           
             <View style={styles.body}>
               <View style={styles.bodyContent}>
                 <Text style={styles.name}>{ displayName}</Text>
                 <Text style={styles.name}>{ staffCode}</Text>
-                <Text style={styles.info}>{ sex} / {  birthDate}</Text>
+                <Text style={styles.info}>{ gender='F' ? 'Female':'Male'} / {  birthDate}</Text>
                 <Text style={styles.description}>{  status}</Text>
                 
                 <TouchableOpacity style={styles.buttonContainer}  onPress={ () => { this.props.navigation.navigate('EditProfile') } }>
