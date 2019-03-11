@@ -10,14 +10,14 @@ const  ProfileFormContainer  = props =>
       updateProfile={props.updateProfile}   
       />   
   const mapDispatchToProps = {
-     loadprofile, loadProfileMessages,
+     loadprofile: loadProfileMessages,
     updateProfile:updateProfileMessage 
 
     }
 
 ProfileFormContainer.propTypes = {
 navigation:  PropTypes.object.isRequired,
-updateProfile: PropTypes.func.isRequired,
+updateProfile: PropTypes.func,
 loadprofile: PropTypes.func.isRequired
 }
 export default connect(null, mapDispatchToProps)(ProfileFormContainer)

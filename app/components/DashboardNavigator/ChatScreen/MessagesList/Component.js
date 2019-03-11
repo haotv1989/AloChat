@@ -40,7 +40,10 @@ class MessageListComponent extends Component {
   }
 
   render() {
-    const data = this.props.data
+    const data = this.props.data;
+  
+    console.log(' Render Chat:')
+    console.log(data)
     const contentContainerStyle = data.length ? null : styles.flatlistContainerStyle
     return (
       <FlatList

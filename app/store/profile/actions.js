@@ -14,12 +14,8 @@ const FIREBASE_REF_MESSAGES_LIMIT = 1
 export const updateProfileMessage = (urlPath,displayName,sex,staffCode,
   birthDate,status,statusAccount) => {
   return (dispatch) => {
-    dispatch(profileMessageLoading())
+    dispatch(profileMessageLoading())   
     
-    // Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-    // StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-    // uploadTask = riversRef.putFile(file);
-    urlPath=uploadImage(urlPath);
     let currentUser = firebaseService.auth().currentUser    
     let createdAt = new Date().getTime()
     let profileMessage = {
@@ -104,6 +100,8 @@ export const uploadImage=(uri, mime = 'application/octet-stream')=> {
         resolve(url)
       })
       .catch((error) => {
+        console.log('Reducer-upload image')
+        console.log(error)
         reject(error)
     })
   })
