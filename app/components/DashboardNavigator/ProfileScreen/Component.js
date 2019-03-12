@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import { View,Text,Image,TouchableOpacity, Alert} from 'react-native'
-import { Badge } from 'react-native-elements'
+import { Badge,Avatar } from 'react-native-elements'
 import styles from './Styles'
 import PropTypes from 'prop-types';
 import { withNavigation } from 'react-navigation';
@@ -27,33 +27,55 @@ class ProfileComponent extends Component {
     }
     //this.getImage = this.getImage.bind(this)
   }
-  
+  componentWillMount() {
+    let _sex,_status, _date;
+    const data =this.props.data;
+    var  _gender=data.map(data => data.Sex);
+    var statusAccount= data.map(data => data.StatusAccount)
+    if (_gender === 'F') {
+      _sex = 'Female';  
+    } else {
+      _sex = 'Male';
+    }
+    
+    if (statusAccount ==='On') {
+      _status = 'success';
+    } else if (statusAccount ==='Idle') {
+      _status = 'warning';
+    } else {
+      _status = 'none';
+    }
+     var _birthDate=data.map(data => data.BirthDate);
+     console.log(_birthDate)
+     _date= moment(new Date(_birthDate)).format('DD/MM/YYYY')
+    this.setState({ sex:_sex,statusAccount: _status,birthDate:_date });
+  }
  
    render() {  
+     const data =this.props.data;
    const displayName =data.map(data => data.DisplayName)
-    const birthDate=  moment(data.map(data => data.BirthDate)).format('DD/MM/YYYY')
+   
+    //const birthDate=  moment(data.map(data => data.BirthDate)).format('DD/MM/YYYY')
     const image_Avatar= data.map(data => data.Image_Avatar);
-    const  gender=data.map(data => data.Sex)
+    //const  gender=data.map(data => data.Sex)
     const staffCode=  data.map(data => data.StaffCode)
     const  status=data.map(data => data.Status)
-    const statusAccount= data.map(data => data.StatusAccount)
+    //const statusAccount= data.map(data => data.StatusAccount)
     return (
 
         <View style={styles.container}>
             <View style={styles.header}>           
             </View>
-           
+            <View style={styles.avatar_bagde}>
             <Image style={styles.avatar} source={{uri: image_Avatar  ? 'https://bootdey.com/img/Content/avatar/avatar6.png': image_Avatar}}/>
-            <Badge  status="success"  style={{ position: 'absolute', top: -4, right: -4 }}  />
-             
-          
+            <Badge style={styles.bagde} status={ this.state.statusAccount}    />
+            </View>          
             <View style={styles.body}>
               <View style={styles.bodyContent}>
                 <Text style={styles.name}>{ displayName}</Text>
-                <Text style={styles.name}>{ staffCode}</Text>
-                <Text style={styles.info}>{ gender='F' ? 'Female':'Male'} / {  birthDate}</Text>
+                <Text style={styles.info}>{ staffCode}</Text>
+                <Text style={styles.info}>{ this.state.sex} / { this.state.birthDate}</Text>
                 <Text style={styles.description}>{  status}</Text>
-                
                 <TouchableOpacity style={styles.buttonContainer}  onPress={ () => { this.props.navigation.navigate('EditProfile') } }>
                   <Text>Change Information</Text>  
                 </TouchableOpacity>       
@@ -68,7 +90,7 @@ class ProfileComponent extends Component {
 
 
   ProfileComponent.propTypes = {
-    data: PropTypes.object,
+    //data: PropTypes.object,
     navigation:PropTypes.object.isRequired,
     data: PropTypes.shape({
       DisplayName: PropTypes.string.isRequired,

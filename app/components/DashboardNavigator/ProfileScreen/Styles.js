@@ -5,6 +5,9 @@ export default StyleSheet.create({
       backgroundColor: "#00BFFF",
       height:200,
     },
+    avatar_bagde:{
+      marginTop:0,
+    },
     avatar: {
       width: 130,
       height: 130,
@@ -14,8 +17,16 @@ export default StyleSheet.create({
       marginBottom:10,
       alignSelf:'center',
       position: 'absolute',
-      marginTop:130
+      marginTop:-50
     },
+    bagde: {
+      width:20,
+      height:20,
+      paddingLeft:0, marginTop: 10,
+      borderRadius:40,      
+      
+    },
+
     name:{
       fontSize:22,
       color:"#FFFFFF",

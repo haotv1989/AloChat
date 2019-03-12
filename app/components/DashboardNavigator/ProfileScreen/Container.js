@@ -32,10 +32,19 @@ const mapDispatchToProps = {
   loadProfileMessages
 }
 
-ProfileContainer.propTypes = {
- profile: PropTypes.object,
+ProfileContainer.propTypes = { 
   error: PropTypes.string, 
-  navigation:PropTypes.object.isRequired
+  navigation:PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    DisplayName: PropTypes.string.isRequired,
+    BirthDate: PropTypes.string.isRequired,
+    Image_Avatar: PropTypes.string.isRequired,
+    StaffCode: PropTypes.string.isRequired,
+    Status: PropTypes.string.isRequired,
+    StatusAccount: PropTypes.string.isRequired,
+    UpdatedAt: PropTypes.string.isRequired,
+    UserID: PropTypes.string.isRequired
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer)
